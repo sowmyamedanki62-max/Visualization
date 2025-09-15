@@ -4,9 +4,7 @@ import docx
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt
 from collections import Counter
-import nltk
-
-nltk.download('punkt')
+import re
 
 # 📄 Extract text from PDF using pdfplumber
 def extract_text_pdf(file):
@@ -23,10 +21,9 @@ def extract_text_docx(file):
     doc = docx.Document(file)
     return " ".join(para.text for para in doc.paragraphs)
 
-# 🧹 Tokenize and clean
+# 🧹 Tokenize and clean using regex (no NLTK needed)
 def get_tokens(text):
-    tokens = nltk.word_tokenize(text.lower())
-    return [word for word in tokens if word.isalpha()]
+    return re.findall(r'\b[a-zA-Z]{2,}\b', text.lower())
 
 # 📊 Histogram
 def plot_histogram(word_freq):
