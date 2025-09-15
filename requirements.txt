@@ -1,0 +1,6 @@
+streamlit
+Pdfplumber
+python-docx
+wordcloud
+matplotlib
+nltk
